@@ -3,8 +3,9 @@ from .models import Aluno
 from .forms import AlunoForm
 from  django.contrib.auth.decorators import login_required
 
+@login_required #define que o usuário esteja logado, para ter acesso às informações. deve-se colocar em todas as funções privadas.
 def alunoView(request):
-    alunos = Aluno.objects.all()
+    alunos = Aluno.objects.all().filter(user=request.user) #vai dar erro ao entrar sem logar. só funciona após criar o app accounts. 
     return render(request, 'main/list.html', {'alunos':alunos}) 
 
 def alunoIdView(request, id):
@@ -12,6 +13,7 @@ def alunoIdView(request, id):
     return render(request, 'main/aluno.html', {'aluno':aluno})
 
 
+@login_required
 def newAluno(request):
     if request.method == 'POST':
         form =AlunoForm(request.POST)
