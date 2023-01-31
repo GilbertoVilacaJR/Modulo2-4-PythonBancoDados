@@ -6,7 +6,7 @@ from  django.contrib.auth.decorators import login_required
 @login_required #define que o usuário esteja logado, para ter acesso às informações. deve-se colocar em todas as funções privadas.
 def alunoView(request):
     alunos = Aluno.objects.all().filter(user=request.user) #vai dar erro ao entrar sem logar. só funciona após criar o app accounts. 
-    return render(request, 'main/list.html', {'alunos':alunos}) 
+    return render(request, 'main/list.html', {'alunos':alunos})
 
 @login_required
 def alunoIdView(request, id):
