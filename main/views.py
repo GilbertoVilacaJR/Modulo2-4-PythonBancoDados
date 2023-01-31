@@ -37,8 +37,22 @@ def exemplo(request):
     
     return render(request, 'main/indexx.html')
 
+def editAluno(request, id):
+    aluno=get_object_or_404(Aluno,pk=id)
+    form=AlunoForm(instance=aluno)
 
+    if(request.method=='POST'):
+        form=AlunoForm(request.POST, instance=aluno)
 
+        if(form.is_valid()):
+            aluno.save()
+            return redirect('/')
+        else:
+            return render(request, 'main/edit_aluno.html', {'form':form,'aluno':aluno})
+    else:
+        return render(request, 'main/edit_aluno.html',{'form':form,'aluno':aluno})
 
-
-
+def deleteAluno(request, id):
+    aluno=get_object_or_404(Aluno,pk=id)
+    aluno.delete()
+    return redirect('/')
