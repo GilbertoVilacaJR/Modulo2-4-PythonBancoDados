@@ -8,6 +8,7 @@ def alunoView(request):
     alunos = Aluno.objects.all().filter(user=request.user) #vai dar erro ao entrar sem logar. só funciona após criar o app accounts. 
     return render(request, 'main/list.html', {'alunos':alunos}) 
 
+@login_required
 def alunoIdView(request, id):
     aluno = get_object_or_404(Aluno, pk=id)
     return render(request, 'main/aluno.html', {'aluno':aluno})
@@ -26,6 +27,7 @@ def newAluno(request):
         form = AlunoForm()
     return render(request, 'main/add_aluno.html', {'form':form})
 
+@login_required
 def exemplo(request):
 
     if request.method == 'POST':
@@ -39,6 +41,7 @@ def exemplo(request):
     
     return render(request, 'main/indexx.html')
 
+@login_required
 def editAluno(request, id):
     aluno=get_object_or_404(Aluno,pk=id)
     form=AlunoForm(instance=aluno)
@@ -54,6 +57,7 @@ def editAluno(request, id):
     else:
         return render(request, 'main/edit_aluno.html',{'form':form,'aluno':aluno})
 
+@login_required
 def deleteAluno(request, id):
     aluno=get_object_or_404(Aluno,pk=id)
     aluno.delete()
