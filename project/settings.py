@@ -29,7 +29,9 @@ SECRET_KEY = "django-insecure-v_ugn$d(91z=fs9_vv#08si^zydez$uld@cgj1u#qtxy5opa@7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io']
+
+CSRF_TRUSTED_ORIGINS=['https://3e7a-179-73-200-33.sa.ngrok.io']
 
 
 # Application definition
@@ -44,7 +46,8 @@ INSTALLED_APPS = [
     "main",
     "crispy_forms",
     "widget_tweaks",
-    "accounts", #add app ao projeto
+    "accounts",
+    "rest_framework", #add app ao projeto
 ]
 
 MIDDLEWARE = [

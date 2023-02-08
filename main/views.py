@@ -62,3 +62,10 @@ def deleteAluno(request, id):
     aluno=get_object_or_404(Aluno,pk=id)
     aluno.delete()
     return redirect('/')
+
+from .serializers import EventoSerializer
+from rest_framework import viewsets
+
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset=Aluno.objects.all()
+    serializer_class=EventoSerializer
